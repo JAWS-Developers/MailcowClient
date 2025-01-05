@@ -1,0 +1,15 @@
+{
+    "appId": "com.jawsdevelopers.mailcowclient",
+    "files": ["dist-electron", "dist-react"],
+    "icon": "./desktopIcon.png",
+    "mac": {
+        "target": "dmg"
+    },
+    "linux": {
+        "target": "AppImage",
+        "category": "Utilily"
+    },
+    "win": {
+        "target": ["portable", "msi"]
+    }
+}
