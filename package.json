@@ -1,7 +1,7 @@
 {
   "name": "dekstopapptemplate",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {
@@ -32,6 +32,7 @@
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.16",
     "globals": "^15.14.0",
+    "jaws-helper": "^3.1.0",
     "npm-run-all": "^4.1.5",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.18.2",
