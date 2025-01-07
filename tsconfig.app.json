@@ -17,11 +17,12 @@
 
     /* Linting */
     "strict": true,
-    "noUnusedLocals": true,
-    "noUnusedParameters": true,
+    "noUnusedLocals": false,
+    "noUnusedParameters": false,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
+    "noUncheckedSideEffectImports": true,
+    "typeRoots": ["node_modules/@types", "types"],
   },
-  "include": ["src"],
+  "include": ["src", "types.d.ts"],
   "exclude": ["src/electron"]
 }

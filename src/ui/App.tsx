@@ -1,31 +1,47 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-
 import './App.css'
+import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router-dom'
+import { AuthProvider, RequireAuth } from './src/contexts/AuthContext'
+import LoadingProvider from './src/contexts/LoadingContext'
+import LoginpPage from './src/pages/Auth/LoginPage'
+import FrameComponent from './src/components/frame/FrameComponent'
+import { ThemeProvider } from './src/contexts/ThemeContext'
+import { MailStack } from './src/navigate/MailStack'
+import { NotificationProvider } from './src/contexts/NotificationContext'
+import CalendarPage from './src/pages/Cal/CalendarPage'
+
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+    <HashRouter>
+      <ThemeProvider>
+        <NotificationProvider>
+          <LoadingProvider>
+            <AuthProvider>
+              <Routes>
+                <Route path='/auth' element={<LoginpPage />} />
+                <Route path='/dev-info' />
+                <Route
+                  path="*"
+                  element={
+                    <RequireAuth>
+                      <FrameComponent>
+
+                        <Routes>
+                          <Route path='*' element={<Navigate to="/mail" replace />} />
+                          <Route path='/mail' element={<MailStack />} />
+                          <Route path='/calendar' element={<CalendarPage />} />
+                        </Routes>
+                      </FrameComponent>
+
+                    </RequireAuth>
+                  }
+                />
+              </Routes>
+            </AuthProvider>
+          </LoadingProvider>
+        </NotificationProvider>
+      </ThemeProvider>
+    </HashRouter>
   )
 }
 

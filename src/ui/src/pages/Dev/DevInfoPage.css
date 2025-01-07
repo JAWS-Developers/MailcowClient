@@ -1,0 +1,93 @@
+
+.dev-info-container {
+    background: linear-gradient(135deg, var(--primary-color), var(--background-color));
+    color: var(--text-color);
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 1200px;
+    margin: 50px auto;
+    box-shadow: var(--box-shadow);
+    overflow: hidden;
+}
+
+.dev-info-header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.dev-info-header h1 {
+    font-size: 3rem;
+    color: var(--header-color);
+    font-weight: bold;
+    text-shadow: 2px 2px 5px var(--box-shadow);
+}
+
+.dev-info-header p {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: var(--subheader-color);
+}
+
+.dev-info-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.card {
+    background: var(--card-background);
+    border-radius: 10px;
+    padding: 20px;
+    flex: 1;
+    min-width: 300px;
+    box-shadow: var(--box-shadow);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px var(--hover-shadow);
+}
+
+.card h2 {
+    font-size: 2rem;
+    color: var(--card-header-color);
+    margin-bottom: 10px;
+    border-bottom: 2px solid var(--card-border-color);
+    padding-bottom: 5px;
+}
+
+.card ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.card li {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.card li a {
+    color: var(--link-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.card li a:hover {
+    text-decoration: underline;
+}
+
+.dev-info-footer {
+    text-align: center;
+    margin-top: 50px;
+    font-size: 1rem;
+    color: var(--subheader-color);
+}
+
+.dev-info-footer .heart {
+    color: var(--secondary-color);
+    font-size: 1.2rem;
+}

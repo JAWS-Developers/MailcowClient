@@ -1,0 +1,22 @@
+.mail-page {
+    display: flex;
+    height: 100vh;
+}
+
+.email-list-container {
+    width: 40%;
+    overflow-y: auto;
+    border-right: 1px solid #ccc;
+}
+
+.selected-email-container {
+    width: 60%;
+    padding: 20px;
+}
+
+.no-email-div {
+    justify-content: center;
+    display: flex;
+    align-items: center;
+    margin-top: 100px;
+}

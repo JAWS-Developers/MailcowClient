@@ -1,6 +1,8 @@
 {
     "appId": "com.jawsdevelopers.mailcowclient",
     "files": ["dist-electron", "dist-react"],
+    "productName": "Mailcow Client",
+    "extraResources": ["dist-electron/preload.cjs"],
     "icon": "./desktopIcon.png",
     "mac": {
         "target": "dmg"

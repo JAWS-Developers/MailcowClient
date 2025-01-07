@@ -1,0 +1,10 @@
+.selected-email {
+    padding: 20px;
+    background: #f9f9f9;
+}
+
+.email-metadata {
+    margin-top: 20px;
+    font-size: 0.9rem;
+    color: #888;
+}

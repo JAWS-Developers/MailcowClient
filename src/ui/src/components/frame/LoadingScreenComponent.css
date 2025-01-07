@@ -1,0 +1,44 @@
+/* Container principale */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    width: 100%;
+    text-align: center;
+    z-index: 1000;
+    position: fixed;
+    background-color: white;
+}
+
+/* Mucca */
+.cow {
+    position: relative;
+    width: 300px;
+    height: 150px;
+    background: url("/200.webp") no-repeat center center;
+    background-size: contain;
+}
+
+
+/* Testo di caricamento */
+.loading-text {
+    margin-top: 20px;
+    font-size: 18px;
+    color: #555;
+    animation: blink 1.5s infinite;
+}
+
+/* Animazione del lampeggio */
+@keyframes blink {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+}
