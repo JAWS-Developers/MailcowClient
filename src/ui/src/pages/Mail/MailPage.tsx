@@ -17,7 +17,6 @@ const MailPage = () => {
     const [hasMore, setHasMore] = useState(true);
 
     const fetchEmails = async (pageNumber: number) => {
-        
     };
 
     useEffect(() => {

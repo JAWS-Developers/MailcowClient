@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 import { AuthContextType, User } from '../types/auth.types';
 import { useNotification } from './NotificationContext';
 import LoadingScreen from '../components/frame/LoadingScreenComponent';
+import { useLoading } from './LoadingContext';
 
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -17,10 +18,10 @@ export const useAuth = () => {
 
 export const AuthProvider = ({ children }: { children: ReactNode }) => {
     const { addNotification } = useNotification();
+    const { setLoadingStatus, loading } = useLoading();
     const nav = useNavigate();
 
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(false);
-    const [loading, setLoading] = useState<boolean>(true);
 
     const [user, setUser] = useState<User>({
         email: "",
@@ -30,13 +31,14 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
     });
 
     const loginF = async () => {
+        setLoadingStatus(true);
         window.electron.getUserCredentials().then(async (userCredentials) => {
             const response = await window.electron.imapLogin(userCredentials.email, userCredentials.password, userCredentials.host);
             switch (response.status) {
                 case "success":
                     addNotification("Welcome back", "success");
                     setIsAuthenticated(true);
-                    setLoading(false)
+                    setLoadingStatus(false)
                     nav("/");
                     break;
             }
@@ -55,11 +57,12 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             email: email,
             id: 0,
         })
+        nav("/");
         setIsAuthenticated(true);
     };
 
     const logout = () => {
-        setLoading(true)
+        setLoadingStatus(true)
         setIsAuthenticated(false);
         setUser({
             name: "",
@@ -68,7 +71,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             id: 0,
         })
         window.electron.removeUserCredentials();
-        setLoading(false)
+        setLoadingStatus(false)
     };
 
     return (
