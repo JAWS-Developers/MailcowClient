@@ -10,7 +10,7 @@ type UserCredentials = {
 }
 
 type EventPayloadMapping = {
-    imapLogin: ImapLogin,
+    checkCredentials: ImapLogin,
     saveUserCredentials: UserCredentials,
     getUserCredentials:  UserCredentials
     removeUserCredentials: void
@@ -18,7 +18,7 @@ type EventPayloadMapping = {
 
 interface Window {
     electron: {
-        imapLogin: (email: string, password: string, host: string) => Promise<ImapLogin>,
+        checkCredentials: (email: string, password: string, host: string) => Promise<ImapLogin>,
         saveUserCredentials: (userCredentials: UserCredentials) => void,
         getUserCredentials: () => Promise<UserCredentials> 
         removeUserCredentials: () => Promise<void>

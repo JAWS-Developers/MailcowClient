@@ -2,7 +2,7 @@ const { contextBridge, ipcRenderer } = require('electron');
 //const { imapLogin } = require("./imap");
 
 contextBridge.exposeInMainWorld('electron', {
-  imapLogin: (email, password, host) => ipcInvoke("imapLogin", { email, password, host }),
+  checkCredentials: (email, password, host) => ipcInvoke("checkCredentials", { email, password, host }),
   saveUserCredentials: (userCredentials) => ipcSend("saveUserCredentials", userCredentials),
   getUserCredentials: () => ipcInvoke("getUserCredentials"),
   removeUserCredentials: () => ipcInvoke("removeUserCredentials")

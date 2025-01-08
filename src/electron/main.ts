@@ -2,8 +2,8 @@ import { app, BrowserWindow, ipcMain } from "electron"
 import path from "path";
 import { ipcHandle, ipcMainOn, isDev } from "./utils.js";
 import { getPreloadPath } from "./pathResolver.js";
-import { imapLogin } from "./imap.js";
-import { getCredentials, removeCredentials, saveCredentials } from "./storage.js";
+import { imapLogin, ImapManager } from "./imap.js";
+import { CredentialsManager, getCredentials, removeCredentials, saveCredentials } from "./storage.js";
 
 type test = String;
 
@@ -23,10 +23,15 @@ app.on("ready", () => {
         mainWindow.loadFile(path.join(app.getAppPath(), "/dist-react/index.html"));
     }
 
-    ipcHandle("imapLogin", imapLogin)
-    ipcHandle("getUserCredentials", getCredentials)
-    ipcMainOn("saveUserCredentials", saveCredentials)
-    ipcHandle("removeUserCredentials", removeCredentials);
+    ipcHandle("checkCredentials", ImapManager.checkAuthCredentials)
+
+    const credentialsManager = new CredentialsManager();
+    credentialsManager.loadCredentials();
+    ipcHandle("getUserCredentials", credentialsManager.getCredentials)
+    ipcMainOn("saveUserCredentials", credentialsManager.saveCredentials)
+    ipcHandle("removeUserCredentials", credentialsManager.removeCredentials);
+    
+
 
     handleCloseEvents(mainWindow);
 })

@@ -8,10 +8,16 @@ const Sidebar = () => {
     const { theme, toggleTheme } = useTheme(); // Ottieni il tema attuale e la funzione di toggle
     const { logout } = useAuth();
     const [isExpanded, setIsExpanded] = useState(false); // Gestione dello stato di espansione
+    const [expandedSubGroup, setExpandedSubGroup] = useState("/mail");
 
     const toggleSidebar = () => setIsExpanded(!isExpanded);
 
     const nav = useNavigate();
+
+    const handleSideBarNavigation = (path: string) => {
+        setExpandedSubGroup(path);
+        nav(path);
+    }
 
     return (
         <div className={`sidebar ${isExpanded ? 'expanded' : ''}`}>
@@ -22,15 +28,44 @@ const Sidebar = () => {
                 <img src='https://avatars.githubusercontent.com/u/23747925?s=280&v=4' />
             )}</div>*/}
             <div className="sidebar-menu">
-                <button onClick={() => nav('/mail')} className="sidebar-item">
-                    📧 {isExpanded && 'Mail'}
-                </button>
-                <button onClick={() => nav('/calendar')} className="sidebar-item">
-                    📅 {isExpanded && 'Calendario'}
-                </button>
-                <button onClick={() => nav('/contacts')} className="sidebar-item">
-                    👥 {isExpanded && 'Contatti'}
-                </button>
+                <div className="sidebar-item-group">
+                    <button onClick={() => handleSideBarNavigation('/mail')} className="sidebar-item">
+                        📧 {isExpanded && 'Mail'}
+                    </button>
+                    {(expandedSubGroup === "/mail" && isExpanded) && (
+                        <div className="subitem-group">
+                            <button onClick={() => nav('/mail')} className="sidebar-item">
+                                bho
+                            </button>
+                        </div>
+                    )}
+
+                </div>
+                <div className="sidebar-item-group">
+                    <button onClick={() => handleSideBarNavigation('/calendar')} className="sidebar-item">
+                        📅 {isExpanded && 'Calendario'}
+                    </button>
+                    {(expandedSubGroup === "/calendar" && isExpanded) && (
+                        <div className="subitem-group">
+                            <label className="sidebar-checkbox-container">
+                                <span className="sidebar-checkbox-label">Attiva/Disattiva Calendario</span>
+                                <input type="checkbox" className="sidebar-checkbox" />
+                            </label>
+                        </div>
+                    )}
+                </div>
+                <div className="sidebar-item-group">
+                    <button onClick={() => handleSideBarNavigation('/contacts')} className="sidebar-item">
+                        👥 {isExpanded && 'Contatti'}
+                    </button>
+                    {(expandedSubGroup === "/mail" && isExpanded) && (
+                        <div className="subitem-group">
+                            <button onClick={() => nav('/mail')} className="sidebar-item">
+                                bho
+                            </button>
+                        </div>
+                    )}
+                </div>
             </div>
             <div className="sidebar-footer">
                 <button className="sidebar-item" onClick={toggleTheme}>

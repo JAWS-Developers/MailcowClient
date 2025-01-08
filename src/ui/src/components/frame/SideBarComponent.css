@@ -20,7 +20,7 @@
     width: 200px;
 }
 
-.sidebar-logo img{
+.sidebar-logo img {
     max-width: 70px;
     height: auto;
 }
@@ -44,10 +44,10 @@
 .sidebar-menu {
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
     gap: 20px;
     flex: 1;
     width: 100%;
+    justify-content: center;
 }
 
 /* Pulsanti del menu */
@@ -63,7 +63,7 @@
     transition: background-color 0.3s, color 0.3s;
 }
 
-.sidebar.expanded .sidebar-item{
+.sidebar.expanded .sidebar-item {
     text-align: left !important;
 }
 
@@ -98,4 +98,56 @@
     background-color: var(--primary-color);
     color: var(--background-color);
     font-weight: bold;
+}
+
+.subitem-group {
+    margin-left: 30px;
+}
+
+/* Contenitore per il checkbox e il testo */
+.sidebar-checkbox-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    /* Spazio tra il checkbox e il testo */
+    padding: 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.sidebar-checkbox-container:hover {
+    background-color: var(--hover-background-color);
+    color: var(--primary-color);
+}
+
+/* Stile del checkbox */
+.sidebar-checkbox {
+    appearance: none;
+    width: 1px;
+    height: 1px;
+    border: 2px solid var(--text-color);
+    border-radius: 4px;
+    /* Angoli arrotondati */
+    background-color: var(--background-color);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.sidebar-checkbox:checked {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.sidebar-checkbox:checked::before {
+    content: '✓';
+    color: var(--background-color);
+}
+
+/* Stile del testo accanto al checkbox */
+.sidebar-checkbox-label {
+    color: var(--text-color);
+    transition: color 0.3s;
 }

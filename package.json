@@ -1,7 +1,7 @@
 {
   "name": "mailcowclient",
   "private": true,
-  "version": "0.0.2",
+  "version": "0.0.3",
   "type": "module",
   "main": "dist-electron/main.js",
   "scripts": {
@@ -17,6 +17,7 @@
     "dist:linux": "npm run transpile:electron && npm run build && electron-builder --linux --x64"
   },
   "dependencies": {
+    "dav": "^1.8.0",
     "electron-updater": "^6.3.9",
     "imap-simple": "^5.1.0",
     "keytar": "^7.9.0",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.17.0",
+    "@types/dav": "^1.7.7",
     "@types/imap-simple": "^4.2.9",
     "@types/react": "^18.3.18",
     "@types/react-big-calendar": "^1.16.0",
