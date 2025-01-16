@@ -1,42 +1,18 @@
-import * as dav from "dav";
+import { createDAVClient } from "tsdav";
+import { getCredentials } from "./storage.js";
 
-async function fetchCalendarEventsForMonth(calendar: dav.Calendar, year: number, month: number) {
-    try {
-        // Calcola l'inizio e la fine del mese
-        const start = new Date(year, month - 1, 1).toISOString(); // Primo giorno del mese
-        const end = new Date(year, month, 0, 23, 59, 59).toISOString(); // Ultimo giorno del mese
+let davClient = null;
 
-        // Sincronizza gli eventi solo per il range specificato
-        const events = await dav.syncCalendar(calendar, {
-            filters: [
-                {
-                    type: 'comp-filter',
-                    attrs: { name: 'VCALENDAR' },
-                    children: [
-                        {
-                            type: 'comp-filter',
-                            attrs: { name: 'VEVENT' },
-                            children: [
-                                {
-                                    type: 'time-range',
-                                    attrs: { start, end },
-                                },
-                            ],
-                        },
-                    ],
-                },
-            ],
-        });
-
-        console.log(`Eventi sincronizzati per ${year}-${month}:`, events);
-        return events;
-    } catch (error) {
-        console.error('Errore durante la sincronizzazione con filtro:', error);
-        throw error;
-    }
-}
-
-
-class CalDavManager {
-    
+const createConn = async () => {
+    const credentials = await getCredentials();
+    davClient = await createDAVClient({
+        serverUrl: `https://${credentials.host}/SOGo/dav/${credentials.email}/Calendar/personal/`,
+        credentials: {
+            username: credentials.email,
+            password: credentials.password,
+        },
+        authMethod: 'Basic', // Usa Basic Auth per SOGo
+        defaultAccountType: 'caldav',
+    });
+    return 
 }
