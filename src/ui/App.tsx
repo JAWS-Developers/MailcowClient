@@ -3,11 +3,12 @@ import { BrowserRouter, HashRouter, Navigate, Route, Routes } from 'react-router
 import { AuthProvider, RequireAuth } from './src/contexts/AuthContext'
 import LoadingProvider from './src/contexts/LoadingContext'
 import LoginpPage from './src/pages/Auth/LoginPage'
-import FrameComponent from './src/components/frame/FrameComponent'
+import MainFrameComponent from './src/components/frame/MainFrameComponent'
 import { ThemeProvider } from './src/contexts/ThemeContext'
 import { MailStack } from './src/navigate/MailStack'
 import { NotificationProvider } from './src/contexts/NotificationContext'
 import CalendarPage from './src/pages/Cal/CalendarPage'
+import { CalendarStack } from './src/navigate/CalendarStack'
 
 
 function App() {
@@ -24,14 +25,13 @@ function App() {
                   path="*"
                   element={
                     <RequireAuth>
-                      <FrameComponent>
-
+                      <MainFrameComponent>
                         <Routes>
                           <Route path='*' element={<Navigate to="/mail" replace />} />
                           <Route path='/mail' element={<MailStack />} />
-                          <Route path='/calendar' element={<CalendarPage />} />
+                          <Route path='/calendar' element={<CalendarStack />} />
                         </Routes>
-                      </FrameComponent>
+                      </MainFrameComponent>
 
                     </RequireAuth>
                   }
