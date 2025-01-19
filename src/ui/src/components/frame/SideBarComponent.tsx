@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../../contexts/ThemeContext'; // Importiamo il contesto del tema
 import './SideBarComponent.css';
 import { useNavigate } from 'react-router-dom';
@@ -13,6 +13,16 @@ const Sidebar = () => {
     const handleSideBarNavigation = (path: string) => {
         nav(path);
     }
+
+    const loadCalendars = async () => {
+        window.electron.getCalendars().then(data => {
+            setCalendars(data)
+        })
+    }
+
+    useEffect(() => {
+        loadCalendars();
+    })
 
     return (
         <div className={`sidebar`}>
