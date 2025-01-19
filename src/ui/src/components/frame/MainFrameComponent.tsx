@@ -1,8 +1,8 @@
 import React from 'react';
 import Sidebar from './SideBarComponent';
-import './FrameComponent.css';
+import './MainFrameComponent.css';
 
-const FrameComponent = ({ children }: { children: React.ReactNode}) => {
+const MainFrameComponent = ({ children }: { children: React.ReactNode}) => {
     return (
         <div className="frame">
             <Sidebar />
@@ -11,4 +11,4 @@ const FrameComponent = ({ children }: { children: React.ReactNode}) => {
     );
 };
 
-export default FrameComponent;
+export default MainFrameComponent;

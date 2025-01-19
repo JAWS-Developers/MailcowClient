@@ -15,7 +15,7 @@ const CalendarPage = () => {
     ]);
 
     const [popupData, setPopupData] = useState(null);
-    const [showPopup, setShowPopup] = useState(false);
+    const [showPopup, setShowPopup] = useState(true);
     const [newEvent, setNewEvent] = useState({ title: '', start: '', end: '', description: '' });
 
     const handleSelectSlot = ({ start, end }) => {
