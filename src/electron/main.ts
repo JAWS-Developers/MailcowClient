@@ -4,6 +4,8 @@ import { ipcHandle, ipcMainOn, isDev } from "./utils.js";
 import { getPreloadPath } from "./pathResolver.js";
 import { ImapManager } from "./imap.js";
 import { getCredentials, removeCredentials, saveCredentials } from "./storage.js";
+import { createConnection } from "net";
+import { createConn, getCalendars } from "./caldav.js";
 
 type test = String;
 
@@ -28,6 +30,9 @@ app.on("ready", () => {
     ipcHandle("getUserCredentials", getCredentials);
     ipcMainOn("saveUserCredentials", saveCredentials);
     ipcHandle("removeUserCredentials", removeCredentials);
+
+    ipcHandle("createConn", createConn);
+    ipcHandle("getCalendars", getCalendars);
     
     handleCloseEvents(mainWindow);
 })

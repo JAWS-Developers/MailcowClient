@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTheme } from '../../contexts/ThemeContext'; // Importiamo il contesto del tema
 import './SideBarComponent.css';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,7 @@ const Sidebar = () => {
     const { logout } = useAuth();
     const [isExpanded, setIsExpanded] = useState(false); // Gestione dello stato di espansione
     const [expandedSubGroup, setExpandedSubGroup] = useState("/mail");
+    const [calendars, setCalendars] = useState<Calendar[]>([]);
 
     const toggleSidebar = () => setIsExpanded(!isExpanded);
 
@@ -18,6 +19,16 @@ const Sidebar = () => {
         setExpandedSubGroup(path);
         nav(path);
     }
+
+    const loadCalendars = async () => {
+        window.electron.getCalendars().then(data => {
+            setCalendars(data)
+        })
+    }
+
+    useEffect(() => {
+        loadCalendars();
+    })
 
     return (
         <div className={`sidebar ${isExpanded ? 'expanded' : ''}`}>
@@ -46,12 +57,15 @@ const Sidebar = () => {
                         📅 {isExpanded && 'Calendario'}
                     </button>
                     {(expandedSubGroup === "/calendar" && isExpanded) && (
-                        <div className="subitem-group">
-                            <label className="sidebar-checkbox-container">
-                                <span className="sidebar-checkbox-label">Attiva/Disattiva Calendario</span>
-                                <input type="checkbox" className="sidebar-checkbox" />
-                            </label>
-                        </div>
+                        calendars.map(cal => (
+                            <div className="subitem-group">
+                                <label className="sidebar-checkbox-container">
+                                    <span className="sidebar-checkbox-label">{cal.displayName}</span>
+                                    <input type="checkbox" className="sidebar-checkbox" />
+                                </label>
+                            </div>
+                        ))
+
                     )}
                 </div>
                 <div className="sidebar-item-group">

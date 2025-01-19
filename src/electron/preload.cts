@@ -5,7 +5,9 @@ contextBridge.exposeInMainWorld('electron', {
   checkCredentials: (email, password, host) => ipcInvoke("checkCredentials", { email, password, host }),
   saveUserCredentials: (userCredentials) => ipcSend("saveUserCredentials", userCredentials),
   getUserCredentials: () => ipcInvoke("getUserCredentials"),
-  removeUserCredentials: () => ipcInvoke("removeUserCredentials")
+  removeUserCredentials: () => ipcInvoke("removeUserCredentials"),
+  createConn: () => ipcInvoke("createConn"),
+  getCalendars: () => ipcInvoke("getCalendars")
 } satisfies Window['electron'])
 
 function ipcInvoke<Key extends keyof EventPayloadMapping>(
